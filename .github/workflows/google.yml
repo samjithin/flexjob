@@ -1,3 +1,7 @@
+
+
+
+
 name: Create a flex template image and trigger a Dataflow Job
 
 on:
@@ -11,7 +15,7 @@ env:
   SUBSCRIPTION: ratings
   DATASET: beam_samples
   TABLE: streaming_beam_sql
-  TEMPLATE_IMAGE: gcr.io/env.PROJECT_ID/samples/dataflow/streaming-beam-sql:latest
+  TEMPLATE_IMAGE: gcr.io/terraformlearning-284414/samples/dataflow/streaming-beam-sql:latest
   TEMPLATE_PATH: gs://env.BUCKET/samples/dataflow/templates/streaming-beam-sql.json
   IMAGE: static-site
 
@@ -29,7 +33,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: env.PROJECT_ID
+        project_id: terraformlearning-284414
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
@@ -41,11 +45,11 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "env.TEMPLATE_IMAGE" .
+          --tag "gcr.io/terraformlearning-284414/samples/dataflow/streaming-beam-sql:latest" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "env.TEMPLATE_IMAGE"
+        docker push "gcr.io/terraformlearning-284414/samples/dataflow/streaming-beam-sql:latest"
 
 
