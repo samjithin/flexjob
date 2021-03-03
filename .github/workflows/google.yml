@@ -2,7 +2,7 @@ name: Create a flex template image and trigger a Dataflow Job
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
