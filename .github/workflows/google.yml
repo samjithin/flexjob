@@ -1,3 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 name: Create a flex template image and trigger a Dataflow Job
 
 on:
@@ -8,11 +27,12 @@ env:
   PROJECT_ID: terraformlearning-284414
   BUCKET: jit92
   TOPIC: messages   
-  SUBSCRIPTION: ratings
+  SUBSCRIPTION: projects/$PROJECT_ID/subscriptions/ratings
   DATASET: beam_samples
   TABLE: streaming_beam_sql
   TEMPLATE_IMAGE: gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest
   TEMPLATE_PATH: gs://$BUCKET/samples/dataflow/templates/streaming-beam-sql.json
+  REGION: us-central1
   
 
 jobs:
@@ -47,5 +67,12 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
+        
+    - name: Publish template file
+      run:   gcloud dataflow flex-template run "streaming-beam-`date +%Y%m%d-%H%M%S`" \
+                --template-file-gcs-location "$TEMPLATE_PATH" \
+                --parameters input_subscription="$SUBSCRIPTION" \
+                --parameters output_table="$PROJECT:$DATASET.$TABLE" \
+                --region "$REGION" 
 
 
