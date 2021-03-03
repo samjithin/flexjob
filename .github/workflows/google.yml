@@ -1,0 +1,51 @@
+name: Create a flex template image and trigger a Dataflow Job
+
+on:
+  push:
+    branches: [main]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  BUCKET: ${{ secrets.BUCKET }}
+  TOPIC: messages   
+  SUBSCRIPTION: ratings
+  DATASET: beam_samples
+  TABLE: streaming_beam_sql
+  TEMPLATE_IMAGE: gcr.io/$PROJECT/samples/dataflow/streaming-beam-sql:latest
+  TEMPLATE_PATH: gs://$BUCKET/samples/dataflow/templates/streaming-beam-sql.json
+  IMAGE: static-site
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "$TEMPLATE_IMAGE" .
+
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |-
+        docker push "$TEMPLATE_IMAGE"
+
+
