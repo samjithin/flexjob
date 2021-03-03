@@ -5,13 +5,13 @@ on:
     branches: [master]
 
 env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  BUCKET: ${{ secrets.BUCKET }}
+  PROJECT_ID: terraformlearning-284414
+  BUCKET: jit92
   TOPIC: messages   
   SUBSCRIPTION: ratings
   DATASET: beam_samples
   TABLE: streaming_beam_sql
-  TEMPLATE_IMAGE: gcr.io/$PROJECT/samples/dataflow/streaming-beam-sql:latest
+  TEMPLATE_IMAGE: gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest
   TEMPLATE_PATH: gs://$BUCKET/samples/dataflow/templates/streaming-beam-sql.json
   IMAGE: static-site
 
@@ -29,7 +29,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ secrets.GKE_PROJECT }}
+        project_id: $PROJECT_ID
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
