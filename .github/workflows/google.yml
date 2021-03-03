@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 name: Create a flex template image and trigger a Dataflow Job
 
 on:
@@ -63,6 +46,6 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/$PROJECT_ID/dataflow/streaming-beam-sql:latest"
+        docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
 
 
