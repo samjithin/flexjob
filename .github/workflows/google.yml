@@ -11,8 +11,8 @@ env:
   SUBSCRIPTION: ratings
   DATASET: beam_samples
   TABLE: streaming_beam_sql
-  TEMPLATE_IMAGE: gcr.io/${PROJECT_ID}/samples/dataflow/streaming-beam-sql:latest
-  TEMPLATE_PATH: gs://${BUCKET}/samples/dataflow/templates/streaming-beam-sql.json
+  TEMPLATE_IMAGE: gcr.io/env.PROJECT_ID/samples/dataflow/streaming-beam-sql:latest
+  TEMPLATE_PATH: gs://env.BUCKET/samples/dataflow/templates/streaming-beam-sql.json
   IMAGE: static-site
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${PROJECT_ID}
+        project_id: env.PROJECT_ID
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
@@ -41,11 +41,11 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "${TEMPLATE_IMAGE}" .
+          --tag "env.TEMPLATE_IMAGE" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "${TEMPLATE_IMAGE}"
+        docker push "env.TEMPLATE_IMAGE"
 
 
