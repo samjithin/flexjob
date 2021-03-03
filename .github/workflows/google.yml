@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 name: Create a flex template image and trigger a Dataflow Job
 
 on:
@@ -8,11 +19,11 @@ env:
   PROJECT_ID: terraformlearning-284414
   BUCKET: jit92
   TOPIC: messages   
-  SUBSCRIPTION: projects/$PROJECT_ID/subscriptions/ratings
+  SUBSCRIPTION: projects/terraformlearning-284414/subscriptions/ratings
   DATASET: beam_samples
   TABLE: streaming_beam_sql
   TEMPLATE_IMAGE: gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest
-  TEMPLATE_PATH: gs://$BUCKET/samples/dataflow/templates/streaming-beam-sql.json
+  TEMPLATE_PATH: gs://jit92/samples/dataflow/templates/streaming-beam-sql.json
   REGION: us-central1
   
 
