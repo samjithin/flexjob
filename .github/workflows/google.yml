@@ -51,8 +51,8 @@ jobs:
         
     - name: Publish template file
       run: |-
-            gcloud dataflow flex-template build $TEMPLATE_PATH \
-              --image "$TEMPLATE_IMAGE" \
+            gcloud dataflow flex-template build gs://$BUCKET/samples/dataflow/templates/streaming-beam-sql.json \
+              --image "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest" \
               --sdk-language "PYTHON" \
               --metadata-file "metadata.json"
                 
