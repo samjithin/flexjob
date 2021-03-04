@@ -50,10 +50,7 @@ jobs:
         docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
         
     - name: Publish template file
-      run: gcloud dataflow flex-template build $TEMPLATE_PATH \
-              --image "$TEMPLATE_IMAGE" \
-              --sdk-language "PYTHON" \
-              --metadata-file "metadata.json" 
+      run: gcloud info 
                 
                 
                     
