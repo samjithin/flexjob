@@ -38,21 +38,16 @@ jobs:
         gcloud --quiet auth configure-docker
 
 
-    - name: Export variables
-      run: export TEMPLATE_IMAGE="gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
-      shell: bash
-
-
     # Build the Docker image
     - name: Build
       run: |-
         docker build \
-          --tag "$TEMPLATE_IMAGE" .
+          --tag "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "$TEMPLATE_IMAGE"
+        docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
         
     - name: Publish template file
       run: |-
