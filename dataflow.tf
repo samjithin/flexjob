@@ -1,3 +1,8 @@
+provider google-beta {
+    project = "terraformlearning-284414"
+    region = "us-central1" 
+}
+
 resource "google_dataflow_flex_template_job" "big_data_job" {
   provider                = google-beta
   name                    = "dataflow-flextemplates-job"
