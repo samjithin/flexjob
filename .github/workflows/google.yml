@@ -40,6 +40,7 @@ jobs:
 
     - name: Export variables
       run: export TEMPLATE_IMAGE="gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
+      run: echo $TEMPLATE_IMAGE
       shell: bash
 
 
