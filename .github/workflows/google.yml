@@ -47,7 +47,7 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest""
+        docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
         
     - name: Publish template file
       run: |-
