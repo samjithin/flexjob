@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 name: Create a flex template image and trigger a Dataflow Job
 
 on:
@@ -50,7 +64,11 @@ jobs:
         docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
         
     - name: Publish template file
-      run: gcloud info 
+      run: |-
+            gcloud dataflow flex-template build gs://jit92/samples/dataflow/templates/streaming-beam-sql.json \
+              --image "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest" \
+              --sdk-language "PYTHON" \
+              --metadata-file "metadata.json"
                 
                 
                     
