@@ -56,34 +56,27 @@ jobs:
               --sdk-language "PYTHON" \
               --metadata-file "metadata.json"
               
-  job2:
-    name: Terraform init and trigger Dataflow Job
-    runs-on: ubuntu-latest
-    needs: job1
-    environment: dev    
-      
-      
-    steps:  
+              
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform init
       run: terraform init
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
-        
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+    
     - name: Terraform plan
       run: terraform plan
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
 
     - name: Terraform apply
       if: github.ref == 'refs/heads/master'
       run: terraform apply -auto-approve
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}       
-                
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
                     
 
 
