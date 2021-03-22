@@ -3,6 +3,7 @@ name: Create a flex template image and trigger a Dataflow Job
 on:
   push:
     branches: [master]
+  pull_request:
 
 env:
   PROJECT_ID: terraformlearning-284414
