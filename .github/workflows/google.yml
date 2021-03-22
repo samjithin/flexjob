@@ -40,16 +40,19 @@ jobs:
 
     # Build the Docker image
     - name: Build
+      if: github.ref == 'refs/heads/master'
       run: |-
         docker build \
           --tag "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
+      if: github.ref == 'refs/heads/master'
       run: |-
         docker push "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest"
         
     - name: Publish template file
+      if: github.ref == 'refs/heads/master'
       run: |-
             gcloud dataflow flex-template build gs://$BUCKET/samples/dataflow/templates/streaming-beam-sql.json \
               --image "gcr.io/$PROJECT_ID/samples/dataflow/streaming-beam-sql:latest" \
