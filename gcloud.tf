@@ -4,10 +4,10 @@ module "gcloud" {
 
   platform = "linux"
   additional_components = ["kubectl", "beta"]
-  skip_download = "false"
+  skip_download = "true"
 
   create_cmd_entrypoint  = "${path.cwd}/scripts/script.sh"
-  #create_cmd_body        = "enable terraformlearning-284414"
+  create_cmd_body        = "enable terraformlearning-284414"
   #destroy_cmd_entrypoint = "gcloud"
   #destroy_cmd_body       = "version"
 }
