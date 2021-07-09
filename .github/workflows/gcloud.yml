@@ -13,7 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    
+    
+    
+    
+    
 
+/*
     - name: Edit file
       run: chmod +x /home/runner/work/flexjob/flexjob/scripts/script.sh
     
@@ -43,3 +50,4 @@ jobs:
       run: terraform apply -auto-approve 
       env: 
          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+ */
