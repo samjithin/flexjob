@@ -18,20 +18,25 @@ jobs:
 #       env:
 #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #         REPO_OWNER: anothrNick
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-          tag_name: "${{ steps.previous_step.outputs.version }}"
-          release_name: Release v1
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+    - name: run command
+      run: t=$(git describe --tags `git rev-list --tags --max-count=1`)
+    - name: pwd
+      run: echo $t
+
+#     - name: Create Release
+#       id: create_release
+#       uses: actions/create-release@v1
+#       env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#       with:
+#           tag_name: "${{ steps.previous_step.outputs.version }}"
+#           release_name: Release v1
+#           body: |
+#             Changes in this Release
+#             - First Change
+#             - Second Change
+#           draft: false
+#           prerelease: false
     
     
     
